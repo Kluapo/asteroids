@@ -1,7 +1,9 @@
 import pygame
 import os
 import sys
-from constants import *
+from constants import SCREEN_WIDTH, SCREEN_HEIGHT  # or whatever constants you need
+from circle_shape import CircleShape
+from player import Player
 
 # Set display before importing pygame
 os.environ['DISPLAY'] = ':0'
@@ -38,6 +40,7 @@ def main():
             new_player.draw(screen)
             pygame.display.flip()
             dt = (my_clock.tick(60))/1000
+            new_player.update(dt)
 
             
     except pygame.error as e:
