@@ -14,6 +14,9 @@ print(f"Video driver: {os.environ.get('SDL_VIDEODRIVER')}")
 
 def main():
     print("Initializing pygame...")
+    my_clock = pygame.time.Clock()
+    dt = 0
+    new_player = Player(SCREEN_WIDTH/2, SCREEN_HEIGHT/2)
     try:
         pygame.init()
         print("Pygame initialized successfully!")
@@ -30,9 +33,12 @@ def main():
                     print("Quit event received")
                     pygame.quit()
                     return
-            
+        
             screen.fill("black")
+            new_player.draw(screen)
             pygame.display.flip()
+            dt = (my_clock.tick(60))/1000
+
             
     except pygame.error as e:
         print(f"Pygame error occurred: {e}")
