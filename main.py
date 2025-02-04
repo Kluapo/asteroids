@@ -1,6 +1,7 @@
 import pygame
 import os
 import sys
+import pygame.sprite
 from constants import SCREEN_WIDTH, SCREEN_HEIGHT  # or whatever constants you need
 from circle_shape import CircleShape
 from player import Player
@@ -18,7 +19,14 @@ def main():
     print("Initializing pygame...")
     my_clock = pygame.time.Clock()
     dt = 0
+    updateable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
     new_player = Player(SCREEN_WIDTH/2, SCREEN_HEIGHT/2)
+    updateable.add(new_player)
+    drawable.add(new_player)
+    print("Updateable group:", list(updateable))
+    print("Drawable group:", list(drawable))
+
     try:
         pygame.init()
         print("Pygame initialized successfully!")
@@ -37,10 +45,12 @@ def main():
                     return
         
             screen.fill("black")
-            new_player.draw(screen)
-            pygame.display.flip()
             dt = (my_clock.tick(60))/1000
-            new_player.update(dt)
+            updateable.update(dt)
+            drawable.draw(screen)
+            pygame.display.flip()
+            
+            
 
             
     except pygame.error as e:
