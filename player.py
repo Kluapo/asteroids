@@ -60,6 +60,7 @@ class Player(CircleShape, pygame.sprite.Sprite):
             self.rotate(-dt)
         if keys[pygame.K_d]:
             self.rotate(dt)
+<<<<<<< Updated upstream
         if keys[pygame.K_w]:
             self.move(dt)
         if keys[pygame.K_s]:
@@ -67,6 +68,20 @@ class Player(CircleShape, pygame.sprite.Sprite):
         
         self.rect.center = self.position
             
+=======
+        if keys[pygame.K_SPACE]:
+            self.shoot()
+
+    def shoot(self):
+        shot = Shot(self.position.x, self.position.y)
+        shot.velocity = pygame.Vector2(0, 1).rotate(self.rotation) * PLAYER_SHOOT_SPEED
+
+
+
+    def rotate(self, dt):
+        self.rotation += PLAYER_TURN_SPEED * dt
+
+>>>>>>> Stashed changes
     def move(self, dt):
         forward = pygame.Vector2(0, 1).rotate(self.rotation)
         self.position += forward * PLAYER_SPEED * dt

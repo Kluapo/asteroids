@@ -12,12 +12,34 @@ os.environ['LIBGL_ALWAYS_INDIRECT'] = '1'
 # Add these lines
 os.environ['SDL_VIDEODRIVER'] = 'x11'
 
+<<<<<<< Updated upstream
 print(f"Display settings: {os.environ.get('DISPLAY')}")
 print(f"Video driver: {os.environ.get('SDL_VIDEODRIVER')}")
 
 def main():
     print("Initializing pygame...")
     my_clock = pygame.time.Clock()
+=======
+def main():
+    pygame.init()
+    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+    clock = pygame.time.Clock()
+
+    updatable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
+    asteroids = pygame.sprite.Group()
+    shots = pygame.sprite.Group()
+
+    Asteroid.containers = (asteroids, updatable, drawable)
+    Shot.containers = (shots, updatable, drawable)
+    AsteroidField.containers = updatable
+    asteroid_field = AsteroidField()
+
+    Player.containers = (updatable, drawable)
+
+    player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+
+>>>>>>> Stashed changes
     dt = 0
     updateable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
